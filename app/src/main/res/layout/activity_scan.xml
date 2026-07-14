@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+
+    <!-- Top Bar: Scan Count -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="@color/surface"
+        android:gravity="center_vertical">
+
+        <!-- Back Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="‹"
+            android:textSize="28sp"
+            app:cornerRadius="8dp"
+            app:backgroundTint="@color/secondary"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Scan Count -->
+        <TextView
+            android:id="@+id/tv_scan_count_top"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="오늘 스캔: 0 EA"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary" />
+    </LinearLayout>
+
+    <!-- Camera Preview -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/preview_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Scanner Frame Overlay (상단 중앙) -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent">
+
+        <View
+            android:id="@+id/scanner_frame"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/scanner_frame_border" />
+    </FrameLayout>
+
+    <!-- Message Display Area -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center"
+        android:minHeight="80dp">
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="QR코드를 카메라에 대세요"
+            android:textSize="16sp"
+            android:textColor="@color/text_secondary"
+            android:gravity="center"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <!-- Bottom: Recent Scans List -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/surface">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recent_scans"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_secondary"
+            android:layout_marginBottom="8dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_recent_scans"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:nestedScrollingEnabled="false" />
+    </LinearLayout>
+
+    <!-- Bottom Bar: Complete Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="@color/surface"
+        android:gravity="center_vertical"
+        android:spacing="12dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_complete"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="@string/complete_button"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/success"
+            app:cornerRadius="8dp" />
+    </LinearLayout>
+
+</LinearLayout>
