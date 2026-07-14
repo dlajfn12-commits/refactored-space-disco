@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark Theme Colors -->
+    <color name="primary">#1F1F1F</color>
+    <color name="primary_variant">#2D2D2D</color>
+    <color name="secondary">#00BCD4</color>
+    <color name="secondary_variant">#00838F</color>
+    <color name="background">#121212</color>
+    <color name="surface">#1E1E1E</color>
+    <color name="error">#CF6679</color>
+    
+    <!-- Status Colors -->
+    <color name="success">#4CAF50</color>
+    <color name="warning">#FF9800</color>
+    <color name="info">#2196F3</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B0B0B0</color>
+    <color name="text_tertiary">#808080</color>
+    
+    <!-- Button Colors -->
+    <color name="button_enabled">#00BCD4</color>
+    <color name="button_disabled">#424242</color>
+    
+    <!-- Camera Overlay -->
+    <color name="overlay_dark">#80000000</color>
+    <color name="scanner_outline">#00BCD4</color>
+</resources>
