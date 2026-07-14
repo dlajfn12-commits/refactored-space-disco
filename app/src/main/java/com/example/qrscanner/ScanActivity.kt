@@ -19,6 +19,7 @@ import com.example.qrscanner.camera.QRCodeAnalyzer
 import com.example.qrscanner.databinding.ActivityScanBinding
 import com.example.qrscanner.ui.ScanViewModel
 import com.example.qrscanner.ui.adapter.ScanAdapter
+import com.example.qrscanner.utils.CSVExporter
 import com.google.common.util.concurrent.ListenableFuture
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -60,8 +61,7 @@ class ScanActivity : AppCompatActivity() {
         }
 
         binding.btnComplete.setOnClickListener {
-            // TODO: CSV export functionality
-            Toast.makeText(this, "완료 버튼", Toast.LENGTH_SHORT).show()
+            exportAndShareCSV()
         }
     }
 
@@ -88,7 +88,23 @@ class ScanActivity : AppCompatActivity() {
                     }
                     else -> {}
                 }
+                viewModel.resetMessage()
             }
+        }
+    }
+
+    private fun exportAndShareCSV() {
+        val records = viewModel.getScanData()
+        if (records.isEmpty()) {
+            Toast.makeText(this, "스캔 기록이 없습니다.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val uri = CSVExporter.exportToCSV(this, records)
+        if (uri != null) {
+            CSVExporter.shareCSV(this, uri)
+        } else {
+            Toast.makeText(this, "CSV 내보내기 실패", Toast.LENGTH_SHORT).show()
         }
     }
 
