@@ -5,16 +5,17 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.qrscanner.camera.QRCodeAnalyzer
 import com.example.qrscanner.databinding.ActivityScanBinding
 import com.example.qrscanner.ui.ScanViewModel
 import com.example.qrscanner.ui.adapter.ScanAdapter
@@ -115,11 +116,23 @@ class ScanActivity : AppCompatActivity() {
                     it.setSurfaceProvider(binding.previewView.surfaceProvider)
                 }
 
+                // QR Code Analyzer
+                val imageAnalysis = ImageAnalysis.Builder()
+                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                    .build()
+                    .also {
+                        it.setAnalyzer(cameraExecutor, QRCodeAnalyzer { qrCode ->
+                            if (viewModel.addScan(qrCode)) {
+                                // 스캔 성공
+                            }
+                        })
+                    }
+
                 val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
                 try {
                     cameraProvider.unbindAll()
-                    cameraProvider.bindToLifecycle(this, cameraSelector, preview)
+                    cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalysis)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
